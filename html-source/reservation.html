@@ -178,7 +178,7 @@
         "use-strict";
         window.addEventListener("load", () => {
           let forms = document.getElementsByClassName("needs-vaidation");
-          let validation = Array.prototype.filter.call(forms, (form) => {
+          Array.prototype.filter.call(forms, (form) => {
             form.addEventListener("submit", (event) => {
               if (form.checkValidity() === false) {
                 event.preventDefault();
