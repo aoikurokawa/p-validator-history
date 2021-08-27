@@ -244,8 +244,27 @@
 
           Toast.fire({});
         };
-        let success = function () {
-          console.log("clicked button and got toast");
+        let success = function (c) {
+          const { msg = "", title = "", footer = "" } = c;
+          Swal.fire({
+            icon: "success",
+            title: title,
+            text: msg,
+            footer: footer,
+          });
+        };
+        return {
+          toast: toast,
+          success: success,
+        };
+        let error = function (c) {
+          const { msg = "", title = "", footer = "" } = c;
+          Swal.fire({
+            icon: "error",
+            title: title,
+            text: msg,
+            footer: footer,
+          });
         };
         return {
           toast: toast,
