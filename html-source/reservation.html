@@ -113,55 +113,29 @@
           >
             <div class="form-row">
               <div class="col">
-                <div class="form-group">
-                  <label for="start_date">Start</label>
-                  <input
-                    required
-                    type="date"
-                    class="form-control"
-                    id="start_date"
-                    name="start_date"
-                    aria-describedby="stateDateHelp"
-                    placeholder="Start Date"
-                  />
-                  <small id="emailHelp" class="form-text text-muted"
-                    >Enter your starting date in the form of YYYY-MM-DD.</small
-                  >
-                </div>
-              </div>
-
-              <div class="col">
-                <div class="form-group">
-                  <label for="end_date">End</label>
-                  <input
-                    required
-                    type="date"
-                    class="form-control"
-                    id="end_date"
-                    name="end_date"
-                    aria-describedby="endDateHelp"
-                    placeholder="End Date"
-                  />
-                  <small id="emailHelp" class="form-text text-muted"
-                    >Enter your ending date in the form of YYYY-MM-DD.</small
-                  >
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="col">
                 <div class="form-row" id="reservatin-date">
                   <div class="col">
-                    <input class="form-control" type="text" name="start" />
+                    <input
+                      required
+                      class="form-control"
+                      type="text"
+                      name="start"
+                      placeholder="Arrival date"
+                    />
                   </div>
                   <div class="col">
-                    <input class="form-control" type="text" name="end" />
+                    <input
+                      required
+                      class="form-control"
+                      type="text"
+                      name="end"
+                      placeholder="Departure date"
+                    />
                   </div>
                 </div>
               </div>
             </div>
-
+            <hr />
             <button type="submit" class="btn btn-primary">
               Search Availability
             </button>
@@ -222,7 +196,9 @@
       })();
 
       const elem = document.getElementById("reservation-date");
-      const rangepicker = new DateRangePicker(elem, {});
+      const rangepicker = new DateRangePicker(elem, {
+        
+      });
     </script>
   </body>
 </html>
