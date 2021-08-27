@@ -181,6 +181,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+      let attention = Prompt();
       (function () {
         "use-strict";
         window.addEventListener(
@@ -217,13 +218,40 @@
 
       function notifyModal(title, text, icon, confirmationButtonText) {
         Swal.fire({
-          title: title, 
-          html: text, 
-          icon: icon, 
-          confirmationButtonText: confirmationButtonText
-        })
+          title: title,
+          html: text,
+          icon: icon,
+          confirmationButtonText: confirmationButtonText,
+        });
       }
-      
+
+      function Prompt() {
+        let toast = function (c) {
+          const { msg = "", icon = "success", position = "top-end" } = c;
+          const Toast = Swal.mixin({
+            toast: true,
+            title: msg,
+            position: position,
+            icon: icon,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({});
+        };
+        let success = function () {
+          console.log("clicked button and got toast");
+        };
+        return {
+          toast: toast,
+          success: success,
+        };
+      }
     </script>
   </body>
 </html>
