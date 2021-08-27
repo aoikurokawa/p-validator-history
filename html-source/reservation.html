@@ -151,10 +151,10 @@
 
             <div class="form-row">
               <div class="col">
-                <div id="foo">
-                  <input type="text" name="start" />
-                  <span>to</span>
-                  <input type="text" name="end" />
+                <div id="reservation-date">
+                  <input class="form-control" type="text" name="start" />
+
+                  <input class="form-control" type="text" name="end" />
                 </div>
               </div>
             </div>
@@ -217,6 +217,9 @@
           false
         );
       })();
+
+      const elem = document.getElementById("reservation-date");
+      const rangepicker = new DateRangePicker(elem, {});
     </script>
   </body>
 </html>
