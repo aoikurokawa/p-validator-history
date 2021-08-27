@@ -17,6 +17,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker-bs4.min.css"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/notie/dist/notie.min.css"
+    />
     <style>
       .my-footer {
         height: 5em;
@@ -28,6 +33,9 @@
       }
       .room-image {
         max-width: 50%;
+      }
+      .notice-container {
+        box-shadow: none;
       }
     </style>
   </head>
@@ -169,6 +177,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js"></script>
+    <script src="https://unpkg.com/notie"></script>
 
     <script>
       (function () {
@@ -196,9 +205,15 @@
       })();
 
       const elem = document.getElementById("reservation-date");
-      const rangepicker = new DateRangePicker(elem, {
-        
-      });
+      const rangepicker = new DateRangePicker(elem, {});
+
+      function notify(msg, msgTyoe) {
+        notice.alert({
+          type: msgTyoe,
+          text: msg,
+        });
+      }
+      
     </script>
   </body>
 </html>
