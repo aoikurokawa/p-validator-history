@@ -1,19 +1,17 @@
 package forms
 
-type errors map[string][]string
+import "net/url"
 
-// Add adds an error message for a given form fields
-func (e errors) Add(field, message string) {
-	e[field] = append(e[field], message)
-
+// Form creates a custom form struct, embeds a url.Values object
+type Form struct {
+	url.Values
+	Errors errors
 }
 
-// Get return first error message
-func (e errors) Get(field string) string {
-	es := e[field]
-	if len(es) == 0 {
-		return ""
+// Hew initialization a form struct
+func New(data url.Values) *Form {
+	return &Form{
+		data,
+		errors(map[string][]string{}),
 	}
-
-	return es[0]
 }
