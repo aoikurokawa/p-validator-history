@@ -70,6 +70,11 @@ func TestForm_MinLength(t *testing.T) {
 		t.Error("form shows min length for non-exist field")
 	}
 
+	isError := form.Errors.Get("x")
+	if isError == "" {
+		t.Error("should have an error, but did not get one")
+	}
+
 	postedData := url.Values{}
 	postedData.Add("some_field", "some_value")
 	form = New(postedData)
@@ -77,11 +82,6 @@ func TestForm_MinLength(t *testing.T) {
 	form.MinLength("some_field", 100, r)
 	if form.Valid() {
 		t.Error("shows minlength of 100 met when data is shorter")
-	}
-
-	isError := form.Errors.Get("x")
-	if isError == "" {
-		t.Error("should have an error, but did not get one")
 	}
 
 	postedData = url.Values{}
