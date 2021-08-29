@@ -22,6 +22,7 @@
                             autocomplete="off" 
                             type='text'
                             name='first_name' 
+                            value="{{$res.FirstName}}"
                             required
                         />
                     </div>
@@ -37,6 +38,7 @@
                             autocomplete="off" 
                             type='text'
                             name='last_name' 
+                            value="{{$res.LastName}}"
                             required
                         />
                     </div>
@@ -72,7 +74,8 @@
                     </div>
 
                     <hr>
-                    <input type="submit" class="btn btn-primary" value="Make Reservation">
+                    <input 
+                        type="submit" class="btn btn-primary" value="Make Reservation">
                 </form>
 
 
