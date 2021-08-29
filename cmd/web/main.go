@@ -10,6 +10,7 @@ import (
 
 	"github.com/Aoi020608/bookings/internal/config"
 	"github.com/Aoi020608/bookings/internal/handlers"
+	"github.com/Aoi020608/bookings/internal/helpers"
 	"github.com/Aoi020608/bookings/internal/models"
 	"github.com/Aoi020608/bookings/internal/render"
 	"github.com/alexedwards/scs/v2"
@@ -71,8 +72,8 @@ func run() error {
 
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
-
 	render.NewTemplates(&app)
+	helpers.NewHelpers(&app)
 
 	return nil
 }
