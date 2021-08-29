@@ -2,12 +2,13 @@ package handlers
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/Aoi020608/bookings/internal/config"
 	"github.com/Aoi020608/bookings/internal/forms"
+	"github.com/Aoi020608/bookings/internal/helpers"
 	"github.com/Aoi020608/bookings/internal/models"
 	"github.com/Aoi020608/bookings/internal/render"
 )
@@ -55,8 +56,9 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
+	err = errors.New("this is an error message")
 	if err != nil {
-		log.Println(err)
+		helpers.ServerError(w, err)
 		return
 	}
 
@@ -121,7 +123,8 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 	out, err := json.MarshalIndent(resp, "", "     ")
 	if err != nil {
-		log.Println(err)
+		helpers.ServerError(w, err)
+		return
 	}
 	w.Header().Set("Content-Type", "application/json")
 
@@ -135,7 +138,7 @@ func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
 	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
 	if !ok {
-		log.Println("Can not get item from session")
+		m.App.ErrorLog.Println("can't get error from session")
 		m.App.Session.Put(r.Context(), "error", "Can't get reservation from session")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
