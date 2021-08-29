@@ -61,7 +61,59 @@ func TestForm_Has(t *testing.T) {
 	}
 }
 
-// func TestForm_MinLength(t *testing.T) {
-// 	r := httptest.NewRequest("POST", "/whatever", nil)
-// 	form := New(r.PostForm)
-// }
+func TestForm_MinLength(t *testing.T) {
+	r := httptest.NewRequest("POST", "/whatever", nil)
+	form := New(r.PostForm)
+
+	form.MinLength("x", 10, r)
+	if form.Valid() {
+		t.Error("form shows min length for non-exist field")
+	}
+
+	postedData := url.Values{}
+	postedData.Add("some_field", "some_value")
+	form = New(postedData)
+
+	form.MinLength("some_field", 100, r)
+	if form.Valid() {
+		t.Error("shows minlength of 100 met when data is shorter")
+	}
+
+	postedData = url.Values{}
+	postedData.Add("another_field", "abc123")
+	form = New(postedData)
+
+	form.MinLength("another_field", 1, r)
+	if !form.Valid() {
+		t.Error("shows minlength of 1 is not met when it is ")
+	}
+
+}
+
+func TestForm_IsEmail(t *testing.T) {
+	r := httptest.NewRequest("POST", "/whatever", nil)
+	form := New(r.PostForm)
+
+	form.IsEmail("x")
+	if form.Valid() {
+		t.Error("from shows valid email for non-existent field")
+	}
+
+	postedValue := url.Values{}
+	postedValue.Add("email", "me@here.com")
+	form = New(postedValue)
+
+	form.IsEmail("email")
+	if !form.Valid() {
+		t.Error("got invalid email when should not have")
+	}
+
+	postedValue = url.Values{}
+	postedValue.Add("email", "x")
+	form = New(postedValue)
+
+	form.IsEmail("email")
+	if form.Valid() {
+		t.Error("got valid for invalid email address")
+	}
+}
