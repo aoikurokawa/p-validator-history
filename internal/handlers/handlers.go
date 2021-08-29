@@ -60,6 +60,7 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 
 	render.RenderTemplate(w, r, "make-reservation.page.html", &models.TemplateData{
 		Form: forms.New(nil),
+		Data: data,
 	})
 }
 
