@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -63,7 +62,6 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
-	err = errors.New("this is an error message")
 	if err != nil {
 		helpers.ServerError(w, err)
 		return
@@ -147,7 +145,7 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 
 type jsonResponse struct {
 	OK      bool   `json:"ok"`
-	Message string `json:message`
+	Message string `json:"message"`
 }
 
 func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
