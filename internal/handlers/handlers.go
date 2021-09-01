@@ -7,10 +7,13 @@ import (
 	"net/http"
 
 	"github.com/Aoi020608/bookings/internal/config"
+	"github.com/Aoi020608/bookings/internal/driver"
 	"github.com/Aoi020608/bookings/internal/forms"
 	"github.com/Aoi020608/bookings/internal/helpers"
 	"github.com/Aoi020608/bookings/internal/models"
 	"github.com/Aoi020608/bookings/internal/render"
+	"github.com/Aoi020608/bookings/internal/repository"
+	"github.com/Aoi020608/bookings/internal/repository/dbrepo"
 )
 
 // Repo the repositry used by the handlers
@@ -19,12 +22,14 @@ var Repo *Repository
 // Repositry is the repository type
 type Repository struct {
 	App *config.AppConfig
+	DB  repository.DatabaseRepo
 }
 
 // NewRepo creates a new repository
-func NewRepo(a *config.AppConfig) *Repository {
+func NewRepo(a *config.AppConfig, db *driver.DB) *Repository {
 	return &Repository{
 		App: a,
+		DB:  dbrepo.NewPostgressRepo(db.SQL, a),
 	}
 }
 
