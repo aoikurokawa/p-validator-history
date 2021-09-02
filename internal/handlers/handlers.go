@@ -155,9 +155,39 @@ func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, r, "search-availability.page.html", &models.TemplateData{})
 }
 
+// availabilty renders the serach availabity page
 func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 	start := r.Form.Get("start")
 	end := r.Form.Get("end")
+
+	layout := "2006-01-02"
+	startDate, err := time.Parse(layout, start)
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
+	endDate, err := time.Parse(layout, end)
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
+	rooms, err := m.DB.SearchAvailabilityForAllRooms(startDate, endDate)
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
+	for _, i := range rooms {
+		m.App.InfoLog.Println("Room:", i.ID, i.RoomName)
+	}
+
+	if len(rooms) == 0 {
+		// no availabilty
+		m.App.InfoLog.Println("Not available")
+
+	}
 
 	w.Write([]byte(fmt.Sprintf("start date is %s and end date is %s", start, end)))
 }

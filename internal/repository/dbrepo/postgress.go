@@ -93,6 +93,7 @@ func (m *postgressDBRepo) SearchAvailabilityByRoomID(start, end time.Time, roomI
 	return false, nil
 }
 
+// SearchAvailabilityForAllRooms returns a slice of available rooms, if any for given date range
 func (m *postgressDBRepo) SearchAvailabilityForAllRooms(start, end time.Time) ([]models.Room, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
