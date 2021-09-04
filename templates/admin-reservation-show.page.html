@@ -87,8 +87,37 @@
             </div>
     
             <hr />
-            <input type="submit" class="btn btn-primary" value="Save" />
-            <a href="/admin/reservations-{{$src}}" class="btn btn-warning">Cancel</a>
+            <div class="float-left">
+                <input type="submit" class="btn btn-primary" value="Save" />
+                <a href="/admin/reservations-{{$src}}" class="btn btn-warning">CANCEL</a>
+                <a class="btn btn-info" onclick="processRes({{$res.ID}})">Mark as processed</a>
+            </div>
+            <div class="float-right">
+                <a class="btn btn-danger" onclick="deleteRes({{$res.ID}})">DELETE</a>
+            </div>
+            <div class="clearfix"></div>
           </form>
     </div>
+{{end}}
+
+{{define "js"}}
+{{$src := index .StringMap "src"}}
+<script>
+    function processRes(id){
+        attention.custom({
+            // icon: 'warning', 
+            msg: "Are you sure?", 
+            callback: function(result) {
+                if (result !== false) {
+                    window.location.href = "/admin/process-reservation/{{$src}}/" + id;
+                }
+            }
+        })
+    }
+
+    function deleteRes(id) {
+
+    }
+</script>
+
 {{end}}
