@@ -89,7 +89,11 @@
             <hr />
             <div class="float-left">
                 <input type="submit" class="btn btn-primary" value="Save" />
-                <a href="/admin/reservations-{{$src}}" class="btn btn-warning">CANCEL</a>
+                {{if eq $src "cal"}}
+                    <a href="#!" onclick="window.history.go(-1)" class="btn btn-warning">CANCEL</a>
+                {{else}}
+                    <a href="/admin/reservations-{{$src}}" class="btn btn-warning">CANCEL</a>
+                {{end}}
                 <a class="btn btn-info" onclick="processRes({{$res.ID}})">Mark as processed</a>
             </div>
             <div class="float-right">
