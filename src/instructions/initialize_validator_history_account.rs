@@ -28,10 +28,12 @@ pub struct InitializeValidatorHistoryAccount<'info> {
 impl<'info> InitializeValidatorHistoryAccount<'info> {
     #[inline(always)]
     pub fn initialize_validator_history_account(&self) -> Result<(), ProgramError> {
+        const VOTE_PROGRAM_ID: Address = address!("Vote111111111111111111111111111111111111111");
         if self
             .vote_account
-            .address()
-            .ne(&solana_vote_interface::program::ID)
+            .to_account_view()
+            .owner()
+            .ne(&VOTE_PROGRAM_ID)
         {
             return Err(ProgramError::InvalidAccountData);
         }

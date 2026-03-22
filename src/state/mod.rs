@@ -18,6 +18,7 @@ pub const MAX_ITEMS: usize = 512;
 pub const MAX_ALLOC_BYTES: usize = 10240;
 pub const MIN_VOTE_EPOCHS: usize = 5;
 
+#[allow(unused_macros)]
 macro_rules! field_latest {
     ($self:expr, $field:ident) => {
         if let Some(entry) = $self.last() {
@@ -32,6 +33,7 @@ macro_rules! field_latest {
     };
 }
 
+#[allow(unused_macros)]
 macro_rules! field_range {
     ($self:expr, $start_epoch:expr, $end_epoch:expr, $field:ident, $type:ty) => {{
         let epoch_range = $self.epoch_range($start_epoch, $end_epoch);

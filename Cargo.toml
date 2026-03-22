@@ -20,8 +20,6 @@ debug = []
 [dependencies]
 quasar-lang = { git = "https://github.com/blueshift-gg/quasar" }
 solana-instruction = { version = "3.2.0" }
-solana-vote-interface = "5.0.0"
-solana-program-error = "2.1.0"
 
 [dev-dependencies]
 bincode = "1.3"
