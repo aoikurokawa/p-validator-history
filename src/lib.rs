@@ -7,7 +7,7 @@ mod errors;
 mod instructions;
 pub mod state;
 
-declare_id!("CFVmthabqbJb9YwK9CY2ztxB4djLFfAEiPmBxHkj9VrV");
+declare_id!("75HQabP8prwPQhFmpu52TW67tF5x8ZpWpHjeMaoK85vW");
 
 #[program]
 mod q_validator_history_program {

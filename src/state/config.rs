@@ -6,7 +6,7 @@ use quasar_lang::{
     },
 };
 
-#[account(discriminator = 1)]
+#[account(discriminator = [155, 12, 170, 224, 30, 250, 204, 130])]
 pub struct Config {
     // This program is used to distribute MEV + track which validators are running jito-solana for a given epoch
     pub tip_distribution_program: Address,
