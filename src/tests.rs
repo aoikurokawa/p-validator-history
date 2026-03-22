@@ -6,9 +6,8 @@ use solana_address::Address;
 use my_program_client::InitializeInstruction;
 
 fn setup() -> QuasarSvm {
-    let elf = include_bytes!("../target/deploy/my_program.so");
-    QuasarSvm::new()
-        .with_program(&Pubkey::from(crate::ID), elf)
+    let elf = include_bytes!("../target/deploy/q_validator_history_program.so");
+    QuasarSvm::new().with_program(&Pubkey::from(crate::ID), elf)
 }
 
 #[test]
