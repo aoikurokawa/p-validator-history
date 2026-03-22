@@ -10,7 +10,7 @@ pub mod state;
 declare_id!("CFVmthabqbJb9YwK9CY2ztxB4djLFfAEiPmBxHkj9VrV");
 
 #[program]
-mod my_program {
+mod q_validator_history_program {
     use super::*;
 
     #[instruction(discriminator = [208, 127, 21, 1, 194, 190, 196, 70])]
