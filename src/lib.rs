@@ -25,7 +25,15 @@ mod q_validator_history_program {
     pub fn initialize_validator_history_account(
         ctx: Ctx<InitializeValidatorHistoryAccount>,
     ) -> Result<(), ProgramError> {
-        ctx.accounts.initialize_validator_history_account()
+        ctx.accounts
+            .initialize_validator_history_account(&ctx.bumps)
+    }
+
+    #[instruction(discriminator = [196, 17, 33, 140, 174, 130, 33, 12])]
+    pub fn realloc_validator_history_account(
+        ctx: Ctx<ReallocValidatorHistoryAccount>,
+    ) -> Result<(), ProgramError> {
+        ctx.accounts.realloc_validator_history_account(&ctx.bumps)
     }
 }
 
