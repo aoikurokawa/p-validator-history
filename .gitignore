@@ -1,3 +1,9 @@
-.vscode
-.idea
+# Build artifacts
+/target
+
+# Environment
+.env
+.env.*
+
+# OS
 .DS_Store
