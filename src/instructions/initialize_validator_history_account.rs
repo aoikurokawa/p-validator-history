@@ -1,4 +1,4 @@
-use quasar_lang::prelude::*;
+use quasar_lang::{prelude::*, sysvars::Sysvar};
 
 use crate::{
     errors::ValidatorHistoryError,
@@ -8,13 +8,11 @@ use crate::{
 #[derive(Accounts)]
 pub struct InitializeValidatorHistoryAccount<'info> {
     #[account(
-        init,
-        payer = signer,
-        space = MAX_ALLOC_BYTES,
+        mut,
         seeds = [ValidatorHistory::SEED, vote_account],
         bump
     )]
-    pub validator_history_account: &'info mut Account<ValidatorHistory>,
+    pub validator_history_account: &'info mut UncheckedAccount,
 
     /// CHECK: Safe because we check the vote program is the owner via constraint.
     pub vote_account: &'info UncheckedAccount,
@@ -27,7 +25,10 @@ pub struct InitializeValidatorHistoryAccount<'info> {
 
 impl<'info> InitializeValidatorHistoryAccount<'info> {
     #[inline(always)]
-    pub fn initialize_validator_history_account(&self) -> Result<(), ProgramError> {
+    pub fn initialize_validator_history_account(
+        &self,
+        bumps: &InitializeValidatorHistoryAccountBumps,
+    ) -> Result<(), ProgramError> {
         const VOTE_PROGRAM_ID: Address = address!("Vote111111111111111111111111111111111111111");
         if self
             .vote_account
@@ -43,6 +44,23 @@ impl<'info> InitializeValidatorHistoryAccount<'info> {
         if epoch_credits_count < MIN_VOTE_EPOCHS {
             return Err(ValidatorHistoryError::NotEnoughVotingHistory.into());
         }
+
+        // Create PDA account manually with only MAX_ALLOC_BYTES
+        // (ValidatorHistory is ~65KB, so we can't allocate the full size in one instruction)
+        let rent = Rent::get()?;
+        let lamports = rent.try_minimum_balance(MAX_ALLOC_BYTES)?;
+
+        let seeds = bumps.validator_history_account_seeds();
+
+        self.system_program
+            .create_account(
+                self.signer,
+                self.validator_history_account,
+                lamports,
+                MAX_ALLOC_BYTES as u64,
+                &crate::ID,
+            )
+            .invoke_signed(&seeds)?;
 
         Ok(())
     }

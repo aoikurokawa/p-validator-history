@@ -35,7 +35,7 @@ pub struct ValidatorHistory {
 }
 
 impl ValidatorHistory {
-    pub const SIZE: usize = 8 + size_of::<Self>();
+    pub const SIZE: usize = Self::SPACE;
     pub const MAX_ITEMS: usize = MAX_ITEMS;
     pub const SEED: &'static [u8] = b"validator-history";
 
