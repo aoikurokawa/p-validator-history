@@ -3,7 +3,7 @@ extern crate std;
 use quasar_svm::{Account, Instruction, Pubkey, QuasarSvm};
 use solana_address::Address;
 
-use my_program_client::InitializeInstruction;
+use q_validator_history_program_client::InitializeInstruction;
 
 fn setup() -> QuasarSvm {
     let elf = include_bytes!("../target/deploy/q_validator_history_program.so");
