@@ -5,8 +5,11 @@ use crate::state::{cluster_history_entry::ClusterHistoryEntry, MAX_ITEMS};
 #[derive(Debug, Clone, Copy)]
 pub struct CircBufCluster {
     pub idx: PodU64,
+
     pub is_empty: u8,
+
     pub padding: [u8; 7],
+
     pub arr: [ClusterHistoryEntry; MAX_ITEMS],
 }
 

@@ -4,12 +4,15 @@ use crate::state::{validator_history_entry::ValidatorHistoryEntry, MAX_ITEMS};
 
 #[derive(Debug, Clone, Copy)]
 pub struct CircBuf {
+    /// Index
     pub idx: PodU64,
 
+    /// Is empty
     pub is_empty: u8,
 
     pub padding: [u8; 7],
 
+    /// Array of [`ValidatorHistoryEntry`]
     pub arr: [ValidatorHistoryEntry; MAX_ITEMS],
 }
 
