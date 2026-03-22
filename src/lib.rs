@@ -3,10 +3,11 @@
 use instructions::*;
 use quasar_lang::prelude::*;
 
+mod errors;
 mod instructions;
 pub mod state;
 
-declare_id!("CnpTBdVonDQAVUSpHngyPNTizW4Zeb1DFn1iGrvJV9Su");
+declare_id!("CFVmthabqbJb9YwK9CY2ztxB4djLFfAEiPmBxHkj9VrV");
 
 #[program]
 mod my_program {
@@ -18,6 +19,13 @@ mod my_program {
         authority: Address,
     ) -> Result<(), ProgramError> {
         ctx.accounts.initialize_config(authority, &ctx.bumps)
+    }
+
+    #[instruction(discriminator = 2)]
+    pub fn initialize_validator_history_account(
+        ctx: Ctx<InitializeValidatorHistoryAccount>,
+    ) -> Result<(), ProgramError> {
+        ctx.accounts.initialize_validator_history_account()
     }
 }
 
