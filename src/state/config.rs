@@ -6,7 +6,7 @@ use quasar_lang::{
     },
 };
 
-#[account(discriminator = 1)]
+#[account(discriminator = [155, 12, 170, 224, 30, 250, 204, 130])]
 pub struct Config {
     // This program is used to distribute MEV + track which validators are running jito-solana for a given epoch
     pub tip_distribution_program: Address,
@@ -33,5 +33,5 @@ pub struct Config {
 
 impl Config {
     pub const SEED: &'static [u8] = b"config";
-    pub const SIZE: usize = 8 + size_of::<Self>();
+    pub const SIZE: usize = 8 + 32 + 32 + 32 + 32 + 4 + 1 + 3 + 32 + 32 + 224;
 }
