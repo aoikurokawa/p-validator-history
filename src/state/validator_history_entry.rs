@@ -6,59 +6,63 @@ use crate::state::{
 
 #[derive(Debug, Clone, Copy)]
 pub struct ValidatorHistoryEntry {
+    /// Activated stake lamports
     pub activated_stake_lamports: PodU64,
 
+    /// Epoch
     pub epoch: PodU16,
 
-    // MEV commission in basis points
+    /// MEV commission in basis points
     pub mev_commission: PodU16,
 
-    // Number of successful votes in current epoch. Not finalized until subsequent epoch
+    /// Number of successful votes in current epoch. Not finalized until subsequent epoch
     pub epoch_credits: PodU32,
 
-    // Validator commission in points
+    /// Validator commission in points
     pub commission: u8,
 
-    // 0 if Solana Labs client, 1 if Jito client, >1 if other
+    /// 0 if Solana Labs client, 1 if Jito client, >1 if other
     pub client_type: u8,
 
+    /// Version
     pub version: ClientVersion,
 
+    /// IP address
     pub ip: [u8; 4],
 
     /// The enum mapping of the Validator's Tip Distribution Account's merkle root upload authority
     pub merkle_root_upload_authority: MerkleRootUploadAuthority,
 
-    // 0 if not a superminority validator, 1 if superminority validator
+    /// 0 if not a superminority validator, 1 if superminority validator
     pub is_superminority: u8,
 
-    // rank of validator by stake amount
+    /// rank of validator by stake amount
     pub rank: PodU32,
 
-    // Most recent updated slot for epoch credits and commission
+    /// Most recent updated slot for epoch credits and commission
     pub vote_account_last_update_slot: PodU64,
 
-    // MEV earned, stored as 1/100th SOL. mev_earned = 100 means 1.00 SOL earned
+    /// MEV earned, stored as 1/100th SOL. mev_earned = 100 means 1.00 SOL earned
     pub mev_earned: PodU32,
 
-    // Priority Fee commission in basis points
+    /// Priority Fee commission in basis points
     pub priority_fee_commission: PodU16,
 
     pub padding0: [u8; 2],
 
-    // Priority Fee tips that were transferred to the distribution account in lamports
+    /// Priority Fee tips that were transferred to the distribution account in lamports
     pub priority_fee_tips: PodU64,
 
-    // The total priority fees the validator earned for the epoch.
+    /// The total priority fees the validator earned for the epoch.
     pub total_priority_fees: PodU64,
 
-    // The number of leader slots the validator had during the epoch
+    /// The number of leader slots the validator had during the epoch
     pub total_leader_slots: PodU32,
 
-    // The final number of blocks the validator produced during an epoch
+    /// The final number of blocks the validator produced during an epoch
     pub blocks_produced: PodU32,
 
-    // The last slot the block data was last updated at
+    /// The last slot the block data was last updated at
     pub block_data_updated_at_slot: PodU64,
 
     /// The enum mapping of the Validator's Tip Distribution Account's merkle root upload authority

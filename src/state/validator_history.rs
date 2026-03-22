@@ -4,20 +4,20 @@ use crate::state::{circ_buf::CircBuf, MAX_ITEMS};
 
 #[account(discriminator = [205, 25, 8, 221, 253, 131, 2, 146])]
 pub struct ValidatorHistory {
-    // Cannot be enum due to Pod and Zeroable trait limitations
+    /// Cannot be enum due to Pod and Zeroable trait limitations
     pub struct_version: PodU32,
 
     pub vote_account: Address,
 
-    // Index of validator of all ValidatorHistory accounts
+    /// Index of validator of all ValidatorHistory accounts
     pub index: PodU32,
 
     pub bump: u8,
 
     pub _padding0: [u8; 7],
 
-    // These Crds gossip values are only signed and dated once upon startup and then never updated
-    // so we track latest time on-chain to make sure old messages aren't uploaded
+    /// These Crds gossip values are only signed and dated once upon startup and then never updated
+    /// so we track latest time on-chain to make sure old messages aren't uploaded
     pub last_ip_timestamp: PodU64,
 
     pub last_version_timestamp: PodU64,
