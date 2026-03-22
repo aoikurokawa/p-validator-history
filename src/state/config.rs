@@ -8,24 +8,27 @@ use quasar_lang::{
 
 #[account(discriminator = [155, 12, 170, 224, 30, 250, 204, 130])]
 pub struct Config {
-    // This program is used to distribute MEV + track which validators are running jito-solana for a given epoch
+    /// This program is used to distribute MEV + track which validators are running jito-solana for a given epoch
     pub tip_distribution_program: Address,
 
-    // Has the ability to upgrade config fields
+    /// Has the ability to upgrade config fields
     pub admin: Address,
 
-    // Has the ability to publish data for specific permissioned fields (e.g. stake per validator)
+    /// Has the ability to publish data for specific permissioned fields (e.g. stake per validator)
     pub oracle_authority: Address,
 
-    // Tracks number of initialized ValidatorHistory accounts
+    /// Tracks number of initialized ValidatorHistory accounts
     pub counter: PodU32,
 
+    /// Bump
     pub bump: u8,
 
     pub padding0: [u8; 3],
 
+    /// Priority fee distribution program ID
     pub priority_fee_distribution_program: Address,
 
+    /// Priority fee oracle authority
     pub priority_fee_oracle_authority: Address,
 
     pub reserve: [u8; 224],

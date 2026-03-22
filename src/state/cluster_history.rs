@@ -1,13 +1,16 @@
+use quasar_lang::prelude::*;
+
 use crate::state::{circ_buf_cluster::CircBufCluster, MAX_ITEMS};
 
+#[account(discriminator = [41, 154, 241, 80, 135, 88, 85, 252])]
 pub struct ClusterHistory {
-    pub struct_version: u64,
+    pub struct_version: PodU64,
 
     pub bump: u8,
 
     pub _padding0: [u8; 7],
 
-    pub cluster_history_last_update_slot: u64,
+    pub cluster_history_last_update_slot: PodU64,
 
     pub _padding1: [u8; 232],
 
