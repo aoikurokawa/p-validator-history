@@ -13,7 +13,7 @@ declare_id!("CFVmthabqbJb9YwK9CY2ztxB4djLFfAEiPmBxHkj9VrV");
 mod my_program {
     use super::*;
 
-    #[instruction(discriminator = 1)]
+    #[instruction(discriminator = [208, 127, 21, 1, 194, 190, 196, 70])]
     pub fn initialize_config(
         ctx: Ctx<InitializeConfig>,
         authority: Address,
@@ -21,7 +21,7 @@ mod my_program {
         ctx.accounts.initialize_config(authority, &ctx.bumps)
     }
 
-    #[instruction(discriminator = 2)]
+    #[instruction(discriminator = [61, 152, 10, 77, 196, 242, 89, 36])]
     pub fn initialize_validator_history_account(
         ctx: Ctx<InitializeValidatorHistoryAccount>,
     ) -> Result<(), ProgramError> {

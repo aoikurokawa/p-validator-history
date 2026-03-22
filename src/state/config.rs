@@ -33,5 +33,5 @@ pub struct Config {
 
 impl Config {
     pub const SEED: &'static [u8] = b"config";
-    pub const SIZE: usize = 8 + size_of::<Self>();
+    pub const SIZE: usize = 8 + 32 + 32 + 32 + 32 + 4 + 1 + 3 + 32 + 32 + 224;
 }
