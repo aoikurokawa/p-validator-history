@@ -2,7 +2,7 @@ use quasar_lang::prelude::*;
 
 use crate::state::{circ_buf::CircBuf, MAX_ITEMS};
 
-#[account(discriminator = 2)]
+#[account(discriminator = [205, 25, 8, 221, 253, 131, 2, 146])]
 pub struct ValidatorHistory {
     // Cannot be enum due to Pod and Zeroable trait limitations
     pub struct_version: PodU32,

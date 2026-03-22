@@ -1,7 +1,10 @@
+use quasar_lang::pod::PodU64;
+
 use crate::state::{cluster_history_entry::ClusterHistoryEntry, MAX_ITEMS};
 
+#[derive(Debug, Clone, Copy)]
 pub struct CircBufCluster {
-    pub idx: u64,
+    pub idx: PodU64,
     pub is_empty: u8,
     pub padding: [u8; 7],
     pub arr: [ClusterHistoryEntry; MAX_ITEMS],
@@ -19,35 +22,35 @@ pub struct CircBufCluster {
 // }
 
 impl CircBufCluster {
-    pub fn push(&mut self, item: ClusterHistoryEntry) {
-        self.idx = (self.idx + 1) % self.arr.len() as u64;
-        self.arr[self.idx as usize] = item;
-        self.is_empty = 0;
-    }
+    // pub fn push(&mut self, item: ClusterHistoryEntry) {
+    //     self.idx = (self.idx + 1) % self.arr.len() as u64;
+    //     self.arr[self.idx as usize] = item;
+    //     self.is_empty = 0;
+    // }
 
-    pub fn is_empty(&self) -> bool {
-        self.is_empty == 1
-    }
+    // pub fn is_empty(&self) -> bool {
+    //     self.is_empty == 1
+    // }
 
-    pub fn last(&self) -> Option<&ClusterHistoryEntry> {
-        if self.is_empty() {
-            None
-        } else {
-            Some(&self.arr[self.idx as usize])
-        }
-    }
+    // pub fn last(&self) -> Option<&ClusterHistoryEntry> {
+    //     if self.is_empty() {
+    //         None
+    //     } else {
+    //         Some(&self.arr[self.idx as usize])
+    //     }
+    // }
 
-    pub fn last_mut(&mut self) -> Option<&mut ClusterHistoryEntry> {
-        if self.is_empty() {
-            None
-        } else {
-            Some(&mut self.arr[self.idx as usize])
-        }
-    }
+    // pub fn last_mut(&mut self) -> Option<&mut ClusterHistoryEntry> {
+    //     if self.is_empty() {
+    //         None
+    //     } else {
+    //         Some(&mut self.arr[self.idx as usize])
+    //     }
+    // }
 
-    pub fn arr_mut(&mut self) -> &mut [ClusterHistoryEntry] {
-        &mut self.arr
-    }
+    // pub fn arr_mut(&mut self) -> &mut [ClusterHistoryEntry] {
+    //     &mut self.arr
+    // }
 
     // /// Returns &ClusterHistoryEntry for each existing entry in range [start_epoch, end_epoch], factoring for wraparound
     // /// Returns None for each epoch that doesn't exist in the CircBuf
@@ -75,17 +78,17 @@ impl CircBufCluster {
     //         .collect()
     // }
 
-    pub fn total_blocks_latest(&self) -> Option<u32> {
-        if let Some(entry) = self.last() {
-            if entry.total_blocks != ClusterHistoryEntry::default().total_blocks {
-                Some(entry.total_blocks)
-            } else {
-                None
-            }
-        } else {
-            None
-        }
-    }
+    // pub fn total_blocks_latest(&self) -> Option<u32> {
+    //     if let Some(entry) = self.last() {
+    //         if entry.total_blocks != ClusterHistoryEntry::default().total_blocks {
+    //             Some(entry.total_blocks)
+    //         } else {
+    //             None
+    //         }
+    //     } else {
+    //         None
+    //     }
+    // }
 
     // pub fn total_blocks_range(&self, start_epoch: u16, end_epoch: u16) -> Vec<Option<u32>> {
     //     let epoch_range = self.epoch_range(start_epoch, end_epoch);
