@@ -1,6 +1,3 @@
 .vscode
 .idea
 .DS_Store
-coverage.out
-run.sh
-database.yml
