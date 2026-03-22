@@ -1,5 +1,4 @@
-use quasar_lang::prelude::*;
-use quasar_lang::sysvars::Sysvar as _;
+use quasar_lang::{prelude::*, sysvars::Sysvar};
 
 use crate::{
     errors::ValidatorHistoryError,
@@ -62,17 +61,6 @@ impl<'info> InitializeValidatorHistoryAccount<'info> {
                 &crate::ID,
             )
             .invoke_signed(&seeds)?;
-
-        // Write discriminator
-        let view_mut = unsafe {
-            &mut *(self.validator_history_account as *const UncheckedAccount
-                as *mut UncheckedAccount
-                as *mut quasar_lang::entrypoint::AccountView)
-        };
-        let disc = ValidatorHistory::DISCRIMINATOR;
-        unsafe {
-            core::ptr::copy_nonoverlapping(disc.as_ptr(), view_mut.data_mut_ptr(), disc.len());
-        }
 
         Ok(())
     }
