@@ -1,6 +1,4 @@
-# Q-Validator History
-
-Validator History program migrated from Anchor to [Quasar](https://github.com/blueshift-gg/quasar).
+# P-Validator History
 
 ## Benchmarks
 
@@ -12,15 +10,3 @@ Compute unit comparison between Anchor and Quasar implementations:
 | `realloc_validator_history_account` | 9,480 | 2,798 | **70%** |
 
 ## Getting started
-
-### Build
-
-```bash
-quasar build
-```
-
-### Deploy
-
-```bash
-quasar deploy
-```
