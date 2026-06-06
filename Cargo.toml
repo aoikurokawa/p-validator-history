@@ -1,23 +1,9 @@
-[package]
-name = "p-validator-history-program"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+members = ["program"]
 
-[lints.rust.unexpected_cfgs]
-level = "warn"
-check-cfg = [
-    'cfg(target_os, values("solana"))',
-]
-
-[lib]
-crate-type = ["cdylib"]
-
-[features]
-alloc = []
-client = []
-debug = []
-
-[dependencies]
+[workspace.dependencies]
 pinocchio = "0.11.1"
 
-[dev-dependencies]
+[workspace.lints.rust.unexpected_cfgs]
+level = "warn"
+check-cfg = ['cfg(target_os, values("solana"))']
