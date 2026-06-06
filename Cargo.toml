@@ -1,5 +1,5 @@
 [package]
-name = "q-validator-history-program"
+name = "p-validator-history-program"
 version = "0.1.0"
 edition = "2021"
 
@@ -18,16 +18,6 @@ client = []
 debug = []
 
 [dependencies]
-quasar-lang = { git = "https://github.com/blueshift-gg/quasar" }
-solana-instruction = { version = "3.2.0" }
+pinocchio = "0.11.1"
 
 [dev-dependencies]
-bincode = "1.3"
-q-validator-history-program-client = { path = "target/client/rust/q-validator-history-program-client" }
-quasar-svm = { git = "https://github.com/blueshift-gg/quasar-svm" }
-serde = { version = "1", features = ["derive"] }
-serde-big-array = "0.5"
-solana-account = { version = "3.4.0" }
-solana-address = { version = "2.2.0", features = ["decode"] }
-solana-instruction = { version = "3.2.0", features = ["bincode"] }
-solana-pubkey = { version = "4.1.0" }
