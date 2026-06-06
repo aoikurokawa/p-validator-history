@@ -35,6 +35,13 @@ mod q_validator_history_program {
     ) -> Result<(), ProgramError> {
         ctx.accounts.realloc_validator_history_account(&ctx.bumps)
     }
+
+    #[instruction(discriminator = [208, 213, 185, 210, 103, 124, 128, 173])]
+    pub fn copy_tip_distribution_account(
+        ctx: Ctx<CopyTipDistributionAccount>,
+    ) -> Result<(), ProgramError> {
+        ctx.accounts.copy_tip_distribution_account()
+    }
 }
 
 #[cfg(test)]
