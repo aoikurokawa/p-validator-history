@@ -1,0 +1,7 @@
+[package]
+name = "p-validator-history-program"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pinocchio.workspace = true
